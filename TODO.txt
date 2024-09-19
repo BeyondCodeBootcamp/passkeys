@@ -1,0 +1,4 @@
+- switch between Hybrid, Login, Register
+- show different options for different flows
+- show table with ids and such
+- show current login info

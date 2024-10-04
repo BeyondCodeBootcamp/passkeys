@@ -103,7 +103,7 @@ type Assertion struct {
 		ClientDataJSON       RawURLBase64       `json:"clientDataJSON"`
 		ClientData           ClientData         `json:"-"`
 		Signature            RawURLBase64       `json:"signature"`
-		VerifiableBytes      []byte             `json:"-"`
+		AttToBeSigned        []byte             `json:"-"`
 	} `json:"response"`
 }
 
@@ -118,10 +118,7 @@ func ParseAssertion(credentialRequestResponse []byte) (*Assertion, error) {
 	}
 
 	clientDataHash := sha256.Sum256(credReq.Response.ClientDataJSON)
-	verifiableData := append(credReq.Response.AuthenticatorDataRaw, clientDataHash[:]...)
-	// each algo specifies the SHA-xxx hash in its name
-	// exception: SHA512 used for EDDSA
-	verifiableHash := sha256.Sum256(verifiableData)
+	attToBeSigned := append(credReq.Response.AuthenticatorDataRaw, clientDataHash[:]...)
 
 	var err error
 	credReq.Response.AuthenticatorData, err = ParseAuthenticatorData(credReq.Response.AuthenticatorDataRaw)
@@ -129,7 +126,7 @@ func ParseAssertion(credentialRequestResponse []byte) (*Assertion, error) {
 		return nil, err
 	}
 
-	credReq.Response.VerifiableBytes = verifiableHash[:]
+	credReq.Response.AttToBeSigned = attToBeSigned
 
 	return credReq, nil
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"crypto/ecdsa"
+	"crypto/sha256"
 	"flag"
 	"fmt"
 	"log"
@@ -121,9 +122,10 @@ func main() {
 
 		// TODO decode CBOR data
 
+		message := sha256.Sum256(assertion.Response.AttToBeSigned)
 		verified := ecdsa.VerifyASN1(
 			registration.Response.PublicKeyECDSA,
-			assertion.Response.VerifiableBytes,
+			message[:],
 			assertion.Response.Signature,
 		)
 		if !verified {

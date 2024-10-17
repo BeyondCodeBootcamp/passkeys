@@ -76,16 +76,10 @@
   <body>
     <header>
       <nav>
-        <a href="https://github.com/BeyondCodeBootcamp/vanilla-webauthn"
-          ><img
-            alt="Vanilla WebAuthn Demo"
-            src="./pocketid-logo.svg"
-            height="48"
-          />
-          <!-- I think this is the Blood Type emjoi?? -->
-          <!-- span style="font-size: 4em"> 🅱 </span -->
+        <a href="https://github.com/BeyondCodeBootcamp/passkeys"
+          ><img alt="Passkeys Demo" src="./pocketid-logo.svg" height="48" />
         </a>
-        <h1>Vanilla WebAuthn Demo</h1>
+        <h1>Passkeys Demo</h1>
         <ul>
           <li>
             <a data-href="#main" class="active">Demo</a>
@@ -94,26 +88,24 @@
             <a data-href="#credentials">Credentials</a>
           </li>
           <li>
-            <a href="https://github.com/BeyondCodeBootcamp/vanilla-webauthn"
+            <a href="https://beyondcodebootcamp.github.io/passkeys"
+              >Presentation</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/BeyondCodeBootcamp/passkeys"
               >Git Source</a
             >
           </li>
         </ul>
       </nav>
-      <p>
-        Although the spec is a bit hard to grok...
-        <br />
-        <strong>The implementation is easy!</strong>
-        <mark>You can do it!</mark>
-        <br />
-      </p>
     </header>
 
     <main>
       <section data-semtab="main">
         <form id="login-form" onsubmit="PassUI.reg.createOrReplaceKey(event)">
           <h2>Select Account</h2>
-          <label
+          <label style="display: none"
             >Mediation Type:
             <small>(Keypass Prompt Style)</small>
             <select name="mediation" onchange="PassUI.auth.setMediation(event)">
@@ -125,7 +117,7 @@
               <option value="required">required*</option>
             </select>
           </label>
-          <label
+          <label style="display: none"
             >Attachment Type:
             <small>Computer (or Phone), or Key (or Tag)</small>
             <select name="attachment" onchange="PassUI.setAttachment(event)">
